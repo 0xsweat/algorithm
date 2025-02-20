@@ -7,11 +7,11 @@ Version : 1
 The purpose of this file (algorithm.py) is for checking username availability across websites.
 """
 import sys
-import requests
 from threading import Thread
 import os
 import json
 from time import sleep
+import requests
 
 def generate() -> dict:
     """
@@ -40,16 +40,19 @@ def generate() -> dict:
         }
     }
 
-    with open("sites.json", 'w') as f:
+    with open("sites.json", 'w', encoding='UTF-8') as f:
         f.write(json.dumps(sites, indent=4))
         f.close()
     return sites
 
 class Checker:
-
+    """
+    This is the main class
+    it encompasses every function used for checking username availability.
+    """
     def __init__(self):
         if os.path.exists("sites.json"):
-            with open("sites.json", 'r') as f:
+            with open("sites.json", 'r', encoding='UTF-8') as f:
                 self.sites: dict = json.load(f)
                 f.close()
         else:
@@ -60,14 +63,16 @@ class Checker:
         self.exit: bool = False
         try:
             if os.path.exists(sys.argv[1]):
-                with open(sys.argv[1], 'r') as f:
+                with open(sys.argv[1], 'r', encoding='UTF-8') as f:
                     self.usernames: list[str] = f.read().split("\n")
                     f.close()
             else:
-                raise FileNotFoundError("usernames file does not exist.\nUSAGE : python3 algorithm.py USERFILE")
+                raise FileNotFoundError(
+                "usernames file does not exist.\nUSAGE : python3 algorithm.py USERFILE")
+                
         except IndexError:
             print("usernames file not supplied.\nUSAGE : python3 algorithm.py USERFILE")
-            quit()
+            sys.exit(0)
 
     def check(self, site: str) -> None:
         """
@@ -85,7 +90,7 @@ class Checker:
             if self.exit:
                 break
         self.tally += 1
-    
+
     def start(self) -> None:
         """
         This function starts the threads for checking each website, 1 thread per site.
@@ -99,7 +104,7 @@ class Checker:
             sys.stdout.flush()
             sys.stdout.write(f"\r{stages[stage]} {self.tally}/{self.total} sites finished {stages[stage]}")
             stage += 1 if stage != len(stages)-1 else -(len(stages)-1)
-        with open("results.json", 'w') as f:
+        with open("results.json", 'w', encoding='UTF-8') as f:
             f.write(json.dumps(self.results, indent=4))
 
 if __name__ == "__main__":
@@ -109,4 +114,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         checker.exit: bool = True
         print("\nbye!")
-        exit(0)
+        sys.exit(0)

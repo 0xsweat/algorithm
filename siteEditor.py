@@ -16,7 +16,7 @@ def loadFromFile() -> dict:
     If it cannot find the sites file it will generate it's own.
     """
     if path.exists("sites.json"):
-        with open("sites.json", 'r') as f:
+        with open("sites.json", 'r', encoding='UTF-8') as f:
             sites: dict = json.load(f)
             f.close()
     else:
@@ -44,7 +44,7 @@ def loadFromFile() -> dict:
             }
         }
 
-        with open("sites.json", 'w') as f:
+        with open("sites.json", 'w', encoding='UTF-8') as f:
             f.write(json.dumps(sites, indent=4))
             f.close()
     return sites
@@ -56,7 +56,7 @@ def add(name: str, url: str, minimum=3, maximum=16) -> None:
     sites: dict = loadFromFile()
     sites['url'][name] = url
     sites['length'][name] = {"min": minimum, "max": maximum}
-    with open("sites.json", 'w') as f:
+    with open("sites.json", 'w', encoding='UTF-8') as f:
         f.write(json.dumps(sites, indent=4))
         f.close()
 
@@ -68,7 +68,7 @@ def remove(name: str) -> bool:
     if sites['url'][name]:
         del sites['url'][name]
         del sites['length'][name]
-        with open("sites.json", 'w') as f:
+        with open("sites.json", 'w', encoding='UTF-8') as f:
             f.write(json.dumps(sites, indent=4))
             f.close()
         return True
