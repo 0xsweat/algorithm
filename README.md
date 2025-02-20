@@ -10,14 +10,21 @@ Clone the repository (or download the script):
 
 - git clone https://github.com/0xsweat/algorithm
 - cd algorithm
-- python3 algorithm.py usernameFile
+- python3 algorithm.py usersFile
 
 <h3> Create a text file containing the usernames you want to check. Each username should be on a new line.</h3>
-<p>For example, create a file named usernames.txt:</p>
-<code>user1
-user2
-user3
-</code>
+
 Run the script:
 
-- python3 algorithm.py usernameFile
+- python3 algorithm.py usersFile
+
+## Editing the site list
+
+To add a site you can use
+
+- python3 siteEditor.py add name url minimumUsernameLength maximumUsernameLength
+- python3 siteEditor.py add name url
+
+To remove a site from the list you can use
+
+- python3 siteEditor.py remove name
