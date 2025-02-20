@@ -20,4 +20,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint --variable-naming-style camelCase --module-naming-style kebab-case --method-naming-style camelCase --function-naming-style camelCase --attr-naming-style camelCase --argument-naming-style camelCase $(git ls-files '*.py')
+        pylint --variable-naming-style camelCase --module-naming-style camelCase --method-naming-style camelCase --function-naming-style camelCase --attr-naming-style camelCase --argument-naming-style camelCase $(git ls-files '*.py')
