@@ -14,8 +14,7 @@ Clone the repository (or download the script):
 
 <h3> Create a text file containing the usernames you want to check. Each username should be on a new line.</h3>
 <p>For example, create a file named usernames.txt:</p>
-<code>
-user1
+<code>user1
 user2
 user3
 </code>
