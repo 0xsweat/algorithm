@@ -54,7 +54,6 @@ class Checker:
                 f.close()
         else:
             self.sites = generate()
-        print(f"Checking {list(self.sites['url'])}!\nMade by 0xsweat and incon")
         self.tally: int = 0
         self.total: int = len(self.sites['url'])
         self.results: dict = {}
