@@ -1,3 +1,11 @@
+"""
+File : algorithm.py
+Author : 0xsweat
+Date : 2/19/2025
+Version : 1
+
+The purpose of this file (algorithm.py) is for checking username availability across websites.
+"""
 import sys
 import requests
 from threading import Thread
@@ -6,6 +14,9 @@ import json
 from time import sleep
 
 def generate() -> dict:
+    """
+    Generates a site list.
+    """
     sites: dict = {
         "url" : {
             "github":"https://github.com/",
@@ -60,6 +71,9 @@ class Checker:
             quit()
 
     def check(self, site: str) -> None:
+        """
+        This function checks a website for username availability.
+        """
         self.results[site]: list[str] = []
         url = self.sites["url"][site]
         for user in self.usernames:
@@ -74,6 +88,9 @@ class Checker:
         self.tally += 1
     
     def start(self) -> None:
+        """
+        This function starts the threads for checking each website, 1 thread per site.
+        """
         for x in self.sites["url"]:
             Thread(target = self.check, args = (x,)).start()
         stages: list = ['|','/','-','\\','|']

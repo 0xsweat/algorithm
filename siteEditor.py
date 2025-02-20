@@ -1,8 +1,20 @@
+"""
+File : siteEditor.py
+Author : 0xsweat
+Date : 2/19/2025
+Version : 1
+
+The purpose of this file (siteEditor.py) is to edit the site list used for algorithm.
+"""
 import json
 from os import path
 from sys import argv
 
 def loadFromFile() -> dict:
+    """
+    Loads the sites into a dictionary from json.
+    If it cannot find the sites file it will generate it's own.
+    """
     if path.exists("sites.json"):
         with open("sites.json", 'r') as f:
             sites: dict = json.load(f)
@@ -38,6 +50,9 @@ def loadFromFile() -> dict:
     return sites
 
 def add(name: str, url: str, minimum=3, maximum=16) -> None:
+    """
+    Adds a site to the list
+    """
     sites: dict = loadFromFile()
     sites['url'][name] = url
     sites['length'][name] = {"min": minimum, "max": maximum}
@@ -46,6 +61,9 @@ def add(name: str, url: str, minimum=3, maximum=16) -> None:
         f.close()
 
 def remove(name: str) -> bool:
+    """
+    Removes a site from the list.
+    """
     sites: dict = loadFromFile()
     if sites['url'][name]:
         del sites['url'][name]
